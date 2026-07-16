@@ -222,21 +222,7 @@ tr.is-dropped .strikeable { text-decoration: line-through; text-decoration-thick
 
 .ledger-foot strong { color: var(--dropped); font-weight: 600; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .ledger tbody tr {
-    opacity: 0;
-    animation: rowIn 0.35s ease-out forwards;
-  }
-  .ledger tbody tr:nth-child(1) { animation-delay: 0.15s; }
-  .ledger tbody tr:nth-child(2) { animation-delay: 0.3s; }
-  .ledger tbody tr:nth-child(3) { animation-delay: 0.45s; }
-  .ledger tbody tr:nth-child(4) { animation-delay: 0.6s; }
-  .ledger tbody tr:nth-child(5) { animation-delay: 0.75s; }
-  @keyframes rowIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: none; }
-  }
-}
+/* ledger row entrance handled by js/site.js */
 
 /* ---------- sections ---------- */
 
@@ -472,3 +458,127 @@ h3 {
 .site-footer p { margin: 0 0 6px; font-size: 15px; color: #c4cfd8; max-width: 44ch; }
 
 .foot-nav { display: grid; gap: 8px; font-family: var(--font-mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ================= motion system (js/site.js) ================= */
+
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation-duration: 0.18s; }
+::view-transition-new(root) { animation-duration: 0.26s; }
+
+/* sticky header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  transition: box-shadow 0.25s ease;
+}
+.site-header.vd-stuck { box-shadow: 0 4px 0 rgba(28, 43, 58, 0.1); }
+
+/* nav highlighter sweep */
+.site-nav a {
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-repeat: no-repeat;
+  background-size: 0% 45%;
+  background-position: 0 78%;
+  transition: background-size 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.site-nav a:hover { background-color: transparent; background-size: 100% 45%; }
+
+/* buttons: hard-shadow lift */
+.btn {
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  will-change: transform;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(28, 43, 58, 0.28); }
+.btn:active { transform: translate(0, 0); box-shadow: 0 0 0 rgba(28, 43, 58, 0); }
+.section-dark .btn:hover { box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45); }
+
+/* cards lift */
+.sheet, .tier {
+  transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sheet:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 rgba(28, 43, 58, 0.16); }
+.tier:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 rgba(28, 43, 58, 0.14); }
+
+/* guide list hover nudge */
+.guide-list a { transition: box-shadow 0.22s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* FAQ marker rotation */
+.faq-list summary::after { transition: transform 0.25s ease, color 0.25s ease; }
+.faq-list details[open] summary::after { transform: rotate(180deg); color: var(--ink); }
+
+/* hero entrance */
+.vd-hero-armed .vd-hero-item {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.vd-hero-go .vd-hero-item {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--vd-i, 0) * 110ms);
+}
+
+/* scroll reveals */
+.vd-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--vd-i, 0) * 80ms);
+}
+.vd-reveal.vd-in { opacity: 1; transform: none; }
+
+/* highlighter swipe (js swaps static box-shadow for painted sweep) */
+.vd-hl {
+  box-shadow: none !important;
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-repeat: no-repeat;
+  background-size: 0% 0.36em;
+  background-position: 0 88%;
+  transition: background-size 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.vd-hl-in { background-size: 100% 0.36em; }
+
+/* ledger verification sequence */
+.vd-ledger-armed tbody tr {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.vd-ledger-armed tbody tr.vd-row-in { opacity: 1; transform: none; }
+
+.vd-ledger-armed .stamp {
+  opacity: 0;
+  transform: scale(1.7) rotate(-7deg);
+}
+.vd-ledger-armed .stamp.vd-stamp-in {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  transition: opacity 0.16s ease-out, transform 0.34s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.vd-ledger-armed tr.is-dropped .strikeable {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  background-position: 0 58%;
+  transition: background-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.vd-ledger-armed tr.is-dropped.vd-struck .strikeable { background-size: 100% 1.5px; }
+
+.vd-ledger-armed .ledger-foot {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.vd-ledger-armed .ledger-foot.vd-in { opacity: 1; transform: none; }
+
+/* reduced motion: kill everything */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .sheet, .tier, .site-nav a, .site-header { transition: none; }
+  .btn:hover, .sheet:hover, .tier:hover { transform: none; }
+}
