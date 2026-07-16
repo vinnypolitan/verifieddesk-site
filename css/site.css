@@ -151,7 +151,10 @@ h1 .hl { box-shadow: inset 0 -0.34em 0 var(--highlight); }
   background: var(--sheet);
   border: 2px solid var(--ink);
   box-shadow: 6px 6px 0 rgba(28, 43, 58, 0.12);
+  overflow-x: auto;
 }
+
+.ledger table { min-width: 640px; }
 
 .ledger-head {
   display: flex;
