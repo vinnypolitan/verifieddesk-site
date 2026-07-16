@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email verification explained: valid, catch-all, and what vendors hide | VerifiedDesk</title>
+<meta name="description" content="How email verification actually works: SMTP mailbox checks, catch-all domains, pattern matching, and why blanket accuracy claims mislead. What to ask any lead list vendor before you buy.">
+<link rel="canonical" href="https://verifieddesk.com/guides/email-verification-tiers/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="VerifiedDesk">
+<meta property="og:title" content="Email verification explained: valid, catch-all, and what vendors hide">
+<meta property="og:description" content="SMTP checks, catch-all domains, and why blanket accuracy claims mislead.">
+<meta property="og:url" content="https://verifieddesk.com/guides/email-verification-tiers/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Email verification explained: valid, catch-all, and what vendors hide",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "author": { "@type": "Organization", "name": "VerifiedDesk", "url": "https://verifieddesk.com/" },
+  "publisher": { "@id": "https://verifieddesk.com/#org" },
+  "mainEntityOfPage": "https://verifieddesk.com/guides/email-verification-tiers/"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">Verified<span class="tick">&#10003;</span>Desk</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/leads/">Lead lists</a>
+      <a href="/research/">Research</a>
+      <a href="/guides/" aria-current="page">Guides</a>
+      <a href="/faq/">FAQ</a>
+      <a href="mailto:hello@verifieddesk.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap prose">
+      <p class="eyebrow">Guide / B2B data quality</p>
+      <h1>Email verification explained: valid, catch-all, and what vendors hide</h1>
+      <p class="meta">Published July 16, 2026 · VerifiedDesk</p>
+
+      <p class="lede">Every lead list vendor claims verified emails. Almost none explain what verification actually checked. The difference matters, because "verified" can mean anything from a confirmed live mailbox to a syntax check that only proves the address contains an @ sign.</p>
+
+      <h2>What a real verification check does</h2>
+      <p>Proper email verification talks to the receiving mail server. The verifier looks up the domain's MX records, connects to the mail server, and asks whether the specific mailbox exists, the same conversation a real email delivery would begin with, stopped before any message is sent. Three outcomes are possible:</p>
+      <ul>
+        <li><strong>Deliverable.</strong> The server confirmed the mailbox exists. This is the only outcome that deserves the word verified without qualification.</li>
+        <li><strong>Catch-all (accept-all).</strong> The server accepts mail for any address at the domain, real or not, so it cannot confirm an individual mailbox. Common on Microsoft 365 and security conscious company domains.</li>
+        <li><strong>Undeliverable or unknown.</strong> The mailbox was rejected, or the server refused to answer (greylisting, rate limiting, anti-scraping defenses).</li>
+      </ul>
+
+      <h2>The catch-all problem is bigger than vendors admit</h2>
+      <p>A meaningful share of business domains run catch-all servers; in some industries and regions it is the majority. In our own delivery work we have built lists in segments where fewer than one in five contacts could be individually confirmed, not because the contacts were wrong, but because the servers refuse to say. Any vendor claiming 95 percent plus verified rates across all industries is either cherry picking easy segments or counting catch-all addresses as verified. That second practice is the industry's quietest lie.</p>
+      <p>The honest treatment is to label catch-all addresses as their own tier: the domain is real, the company is real, the address follows the company's confirmed email pattern, but the individual mailbox is unconfirmed. Priced and treated accordingly.</p>
+
+      <h2>Pattern matching, used honestly</h2>
+      <p>When a mailbox cannot be confirmed, a good researcher can still find the company's address format from addresses that did verify, published contact pages, or public correspondence. first.last@company.com is not a guess if four colleagues confirm the pattern. But it is still an inference, and a list that mixes inferred addresses in with confirmed ones without labels is hiding its real quality.</p>
+
+      <h2>Questions that expose a weak vendor</h2>
+      <ol>
+        <li>What percentage of this list was individually confirmed at the mailbox level, and when?</li>
+        <li>How do you label catch-all addresses, and are they priced the same as confirmed ones?</li>
+        <li>What happens to contacts that fail verification? Removed, disclosed, or quietly left in?</li>
+        <li>Can you show a per row verification status, not just an overall accuracy claim?</li>
+      </ol>
+      <p>A vendor with good data answers all four in one email. A vendor selling padding changes the subject.</p>
+
+      <p>This grading logic is the core of how <a href="/leads/">VerifiedDesk lead lists</a> work: Tier A confirmed, Tier B pattern matched on catch-all domains, Tier C directory grade, and dropped records disclosed with reasons. The tiers exist because the underlying reality has tiers, whoever you buy from.</p>
+
+      <p class="src">Based on standard SMTP verification mechanics (RFC 5321 command flow) and VerifiedDesk delivery experience across verification tools and industry segments.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <p class="foot-brand">Verified<span class="tick">&#10003;</span>Desk</p>
+      <p>Independent B2B research desk. Verified lead lists and cited market research for small B2B teams.</p>
+      <p><a href="mailto:hello@verifieddesk.com">hello@verifieddesk.com</a></p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="/leads/">Lead lists</a>
+      <a href="/research/">Research reports</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

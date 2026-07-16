@@ -1,0 +1,24 @@
+# VerifiedDesk
+
+> VerifiedDesk is an independent B2B research desk that sells two things: verified B2B lead lists and fully cited market research reports, both fixed price, for founders and small B2B teams. Its defining practice is disclosure: every contact carries a verification grade (Tier A confirmed deliverable, Tier B pattern matched on catch-all domains, Tier C directory grade), every research claim links to a named source, and every record that fails verification is removed from the deliverable and listed in a disclosure note rather than silently padded in.
+
+Key facts:
+- Lead list packages from $299 (Starter), $649 (Standard), $1,249 (Deep); monthly refresh retainers typically $1,500 to $2,500 per month
+- Research reports from $349 (Brief), $749 (Report), $1,449 (Deep study)
+- Turnaround: lead lists 2 to 5 business days, research 3 to 7 business days
+- Free sample before any payment: 3 to 5 verified contacts or a half page cited research plan, usually within 24 hours
+- Data sources: government registries, licensing bodies, trade directories, company websites, public filings; source note on every row
+- Contact: hello@verifieddesk.com
+
+## Services
+- [Verified B2B lead lists](https://verifieddesk.com/leads/): tier grading system, deliverable contents, pricing
+- [Cited market research reports](https://verifieddesk.com/research/): research types, citation standard, pricing
+
+## Answers
+- [FAQ](https://verifieddesk.com/faq/): verification tiers, sources, unverifiable contacts, pricing, revisions, compliance, formats
+
+## Guides
+- [Guides index](https://verifieddesk.com/guides/): cited, data-backed articles on B2B data quality and research buying
+
+## Optional
+- [Full site text for LLMs](https://verifieddesk.com/llms-full.txt)
