@@ -13,6 +13,7 @@ Key facts:
 ## Services
 - [Verified B2B lead lists](https://verifieddesk.com/leads/): tier grading system, deliverable contents, pricing
 - [Cited market research reports](https://verifieddesk.com/research/): research types, citation standard, pricing
+- [Research report ladder](https://verifieddesk.com/reports/): seven fixed-price scopes from Market Snapshot ($349) to Growth Plan ($999); full ladder bundle $2,500; delivered in 24 to 48 hours; every claim carries a live source URL
 
 ## Answers
 - [FAQ](https://verifieddesk.com/faq/): verification tiers, sources, unverifiable contacts, pricing, revisions, compliance, formats
