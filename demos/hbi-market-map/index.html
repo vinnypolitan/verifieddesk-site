@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Healthcare Market Map — Interactive Demo</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+  :root{
+    --bg:#0e1726; --panel:#131f33; --line:#22314d; --ink:#eaf1fb;
+    --muted:#8fa3c2; --accent:#3ea6ff; --accent2:#39d5b1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.5 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  header{padding:22px 28px 6px}
+  header h1{margin:0;font-size:22px;font-weight:650;letter-spacing:.2px}
+  header p{margin:6px 0 0;color:var(--muted);max-width:720px}
+  .wrap{display:flex;gap:0;min-height:calc(100vh - 96px)}
+  #chart{flex:1;min-width:0;cursor:pointer}
+  #chart svg{display:block;width:100%;height:auto}
+  aside{width:340px;max-width:42vw;border-left:1px solid var(--line);
+    background:var(--panel);padding:24px;display:flex;flex-direction:column;gap:14px}
+  aside h2{margin:0;font-size:19px}
+  aside .kicker{color:var(--accent2);font-size:12px;text-transform:uppercase;
+    letter-spacing:.14em;margin:0}
+  aside p{margin:0;color:var(--muted)}
+  .stat{font-size:30px;font-weight:700;color:var(--ink)}
+  .stat small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:4px 12px;
+    font-size:12.5px;color:var(--ink);background:#182640;cursor:pointer}
+  .chip:hover{border-color:var(--accent)}
+  .cta{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+  .cta a{display:block;text-align:center;text-decoration:none;border-radius:8px;
+    padding:11px 14px;font-weight:600}
+  .cta a.primary{background:var(--accent);color:#06121f}
+  .cta a.ghost{border:1px solid var(--line);color:var(--ink)}
+  .hint{color:var(--muted);font-size:12.5px}
+  footer{padding:10px 28px 22px;color:var(--muted);font-size:12.5px}
+  @media (max-width: 760px){
+    .wrap{flex-direction:column}
+    aside{width:100%;max-width:none;border-left:none;border-top:1px solid var(--line)}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>The Healthcare Ecosystem, Mapped</h1>
+  <p>Explore the sectors, sub-sectors and investors tracked in the intelligence
+     database. Click a circle to zoom in, click a sub-sector for detail.
+     <span class="hint">(Demo build — sample taxonomy and counts; production
+     version loads the full Excel taxonomy.)</span></p>
+</header>
+<div class="wrap">
+  <div id="chart"></div>
+  <aside id="panel">
+    <p class="kicker" id="p-kicker">Ecosystem</p>
+    <h2 id="p-title">Healthcare Market</h2>
+    <div class="stat"><span id="p-count">5,000+</span><small>companies &amp; organisations covered</small></div>
+    <p id="p-desc">Nine major categories spanning providers, capital, technology
+       and the advisory layer around them. Select a category to explore its
+       sub-sectors.</p>
+    <div class="chips" id="p-chips"></div>
+    <div class="cta">
+      <a class="primary" href="#" onclick="return false">Request a demo</a>
+      <a class="ghost" href="#" onclick="return false">See how this market is mapped</a>
+    </div>
+  </aside>
+</div>
+<footer>Interactive concept demo. Embeddable as a single self-contained file; categories update from a spreadsheet.</footer>
+<script>
+const DATA = {name:"Healthcare Market", desc:"Nine major categories spanning providers, capital, technology and the advisory layer around them.", children:[
+ {name:"Providers", n:2100, desc:"Operators delivering care across every setting, from acute hospitals to home care.", children:[
+  {name:"Hospitals",n:520},{name:"Elderly Care",n:410},{name:"Diagnostics",n:290},{name:"Dental",n:230},
+  {name:"Mental Health",n:200},{name:"Ophthalmology",n:120},{name:"Pharmacy",n:140},{name:"Rehabilitation",n:100},{name:"Home Care",n:90}]},
+ {name:"Investors", n:640, desc:"The capital layer behind healthcare consolidation and growth.", children:[
+  {name:"Private Equity",n:260},{name:"Family Offices",n:90},{name:"Pension Funds",n:60},
+  {name:"Sovereign Wealth Funds",n:40},{name:"Venture Capital",n:130},{name:"Infrastructure Funds",n:60}]},
+ {name:"Healthcare IT", n:520, desc:"Software and data businesses digitising care delivery and administration.", children:[
+  {name:"EHR & Clinical Systems",n:140},{name:"Telehealth",n:110},{name:"Data & Analytics",n:120},{name:"Patient Engagement",n:80},{name:"Revenue Cycle",n:70}]},
+ {name:"Medtech", n:430, desc:"Devices, equipment and consumables across the care pathway.", children:[
+  {name:"Imaging",n:90},{name:"Surgical",n:120},{name:"Monitoring",n:80},{name:"Consumables",n:140}]},
+ {name:"Life Sciences", n:390, desc:"Pharma, biotech and the organisations serving them.", children:[
+  {name:"Pharma",n:150},{name:"Biotech",n:130},{name:"CRO / CDMO",n:110}]},
+ {name:"Advisors", n:350, desc:"The professional layer around transactions and strategy.", children:[
+  {name:"M&A / Corporate Finance",n:120},{name:"Strategy Consulting",n:90},{name:"Legal",n:80},{name:"Due Diligence",n:60}]},
+ {name:"Suppliers", n:280, desc:"Products and services keeping healthcare operators running.", children:[
+  {name:"Facilities & Equipment",n:110},{name:"Staffing",n:90},{name:"Logistics",n:80}]},
+ {name:"Academic", n:160, desc:"Universities, teaching hospitals and research institutes.", children:[
+  {name:"Teaching Hospitals",n:70},{name:"Research Institutes",n:90}]},
+ {name:"Government / Public Sector", n:130, desc:"Public payors, regulators and state-run provision.", children:[
+  {name:"Public Payors",n:50},{name:"Regulators",n:30},{name:"Public Providers",n:50}]}
+]};
+
+const W=860,H=720;
+const color=d3.scaleOrdinal(DATA.children.map(d=>d.name),
+ ["#3ea6ff","#39d5b1","#ffb454","#f4718a","#a58bff","#5fd068","#ff8f6b","#4dd0e1","#c0ca6b"]);
+const root=d3.pack().size([W-4,H-4]).padding(6)
+ (d3.hierarchy(DATA).sum(d=>d.n||0).sort((a,b)=>b.value-a.value));
+const svg=d3.select("#chart").append("svg")
+ .attr("viewBox",`-${W/2} -${H/2} ${W} ${H}`).style("max-height","78vh");
+let focus=root,view;
+const node=svg.append("g").selectAll("circle").data(root.descendants().slice(1)).join("circle")
+ .attr("fill",d=>d.children?color(d.ancestors().slice(-2)[0].data.name):"#182640")
+ .attr("fill-opacity",d=>d.children?0.28:1)
+ .attr("stroke",d=>color((d.children?d:d.parent).ancestors().slice(-2)[0].data.name))
+ .attr("stroke-opacity",.7)
+ .on("mouseover",function(){d3.select(this).attr("stroke-width",2.5)})
+ .on("mouseout",function(){d3.select(this).attr("stroke-width",1)})
+ .on("click",(e,d)=>{showPanel(d);if(d.children&&focus!==d){zoom(e,d);e.stopPropagation();}else e.stopPropagation();});
+const label=svg.append("g").style("font","600 13px Segoe UI,system-ui,sans-serif")
+ .attr("pointer-events","none").attr("text-anchor","middle")
+ .selectAll("text").data(root.descendants()).join("text")
+ .style("fill","#eaf1fb")
+ .style("fill-opacity",d=>d.parent===root?1:0)
+ .style("display",d=>d.parent===root?"inline":"none")
+ .text(d=>d.data.name);
+svg.on("click",e=>{zoom(e,root);showPanel(root);});
+function zoomTo(v){
+ const k=Math.min(W,H)/v[2];view=v;
+ label.attr("transform",d=>`translate(${(d.x-v[0])*k},${(d.y-v[1])*k})`);
+ node.attr("transform",d=>`translate(${(d.x-v[0])*k},${(d.y-v[1])*k})`).attr("r",d=>d.r*k);
+}
+function zoom(e,d){
+ focus=d;
+ const t=svg.transition().duration(650)
+  .tween("zoom",()=>{const i=d3.interpolateZoom(view,[focus.x,focus.y,focus.r*2.2]);return t=>zoomTo(i(t));});
+ label.filter(function(x){return x.parent===focus||this.style.display==="inline";})
+  .transition(t).style("fill-opacity",x=>x.parent===focus?1:0)
+  .on("start",function(x){if(x.parent===focus)this.style.display="inline";})
+  .on("end",function(x){if(x.parent!==focus)this.style.display="none";});
+}
+zoomTo([root.x,root.y,root.r*2.2]);
+function showPanel(d){
+ const cat=d===root?null:d.ancestors().slice(-2)[0];
+ document.getElementById("p-kicker").textContent=d===root?"Ecosystem":(d.children?"Category":cat.data.name);
+ document.getElementById("p-title").textContent=d.data.name;
+ document.getElementById("p-count").textContent=(d===root?"5,000+":(d.value||d.data.n).toLocaleString());
+ document.getElementById("p-desc").textContent=d.data.desc||
+  `${d.data.name} organisations tracked in the database, with ownership, deal history and coverage detail.`;
+ const chips=document.getElementById("p-chips");chips.innerHTML="";
+ (d.children||(d.parent&&d.parent.children.filter(s=>s!==d))||[]).slice(0,12).forEach(c=>{
+  const el=document.createElement("span");el.className="chip";el.textContent=c.data.name;
+  el.onclick=()=>{showPanel(c);if(c.children)zoom(new Event("click"),c);};chips.appendChild(el);});
+}
+showPanel(root);
+</script>
+</body>
+</html>
