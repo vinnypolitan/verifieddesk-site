@@ -12,6 +12,7 @@ Key facts:
 - Contact: hello@verifieddesk.com
 
 ## Services
+- [For AI-run businesses](https://verifieddesk.com/ai-run-businesses/): fulfillment packaged for companies operated with AI assistants and agents; machine-written briefs accepted as-is and confirmed back requirement by requirement; deliverables built to survive machine audit (verification grade or source link on every unit, disclosure notes, stable schemas, CSV/XLSX/JSON, file checksums); async, fixed price, free sample first so the client's own AI can audit before any payment
 - [AI automation builds](https://verifieddesk.com/automation/): fixed-price build scopes from Task Automation ($750) to Full System Build ($7,500), plus the Autonomous Content Engine, a proven end-to-end content pipeline (an operated case-study brand has 80,000+ subscribers and six-figure revenue with zero editorial staff; brands are never named, analytics verified live on a call); demo-first process; runs on the client's own accounts and API keys; client owns everything at handover
 - [Verified B2B lead lists](https://verifieddesk.com/leads/): tier grading system, deliverable contents, pricing
 - [Cited market research reports](https://verifieddesk.com/research/): research types, citation standard, pricing
