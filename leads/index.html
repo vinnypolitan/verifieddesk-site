@@ -101,6 +101,47 @@
           <p>Confirmed company record without a verified individual contact. Useful for phone or form outreach and for market mapping.</p>
         </div>
       </div>
+      <figure class="vd-diagram">
+        <svg viewBox="0 0 720 340" width="100%" role="img" aria-label="Verification funnel diagram: raw candidate records pass through a mail server check, an email pattern match, and a company record check, then exit as Tier A verified, Tier B pattern matched, or Tier C directory grade. Records that fail every check are dropped and disclosed with a reason." xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="vd-arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#93a1c0"/></marker>
+            <marker id="vd-arr-drop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#ff6b5e"/></marker>
+          </defs>
+          <!-- raw pool -->
+          <rect x="16" y="130" width="168" height="80" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="100" y="162" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">RAW CANDIDATES</text>
+          <text x="100" y="184" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--slate)">unchecked rows in</text>
+          <!-- verification gate -->
+          <text x="350" y="48" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="var(--pulse)">VERIFICATION</text>
+          <rect x="248" y="60" width="204" height="220" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(108,140,255,0.45)"/>
+          <rect x="264" y="78" width="172" height="50" rx="6" fill="none" stroke="rgba(151,169,213,0.35)"/>
+          <text x="350" y="108" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">01 / mail server check</text>
+          <rect x="264" y="145" width="172" height="50" rx="6" fill="none" stroke="rgba(151,169,213,0.35)"/>
+          <text x="350" y="175" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">02 / email pattern match</text>
+          <rect x="264" y="212" width="172" height="50" rx="6" fill="none" stroke="rgba(151,169,213,0.35)"/>
+          <text x="350" y="242" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">03 / company record check</text>
+          <!-- flow arrows -->
+          <line x1="184" y1="170" x2="242" y2="170" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr)"/>
+          <path d="M452 103 L484 103 L484 66 L510 66" fill="none" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr)"/>
+          <path d="M452 170 L484 170 L484 134 L510 134" fill="none" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr)"/>
+          <path d="M452 237 L470 237 L470 202 L510 202" fill="none" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr)"/>
+          <path d="M452 262 L484 262 L484 290 L510 290" fill="none" stroke="#ff6b5e" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#vd-arr-drop)"/>
+          <!-- outputs -->
+          <rect x="516" y="40" width="188" height="52" rx="6" fill="none" stroke="var(--verified)" stroke-width="1.5"/>
+          <text x="610" y="62" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--verified)">TIER A / VERIFIED</text>
+          <text x="610" y="80" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--verified)">mailbox confirmed deliverable</text>
+          <rect x="516" y="108" width="188" height="52" rx="6" fill="none" stroke="var(--catchall)" stroke-width="1.5"/>
+          <text x="610" y="130" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--catchall)">TIER B / PATTERN</text>
+          <text x="610" y="148" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--catchall)">catch-all, pattern matched</text>
+          <rect x="516" y="176" width="188" height="52" rx="6" fill="none" stroke="rgba(151,169,213,0.6)" stroke-width="1.5"/>
+          <text x="610" y="198" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--slate)">TIER C / DIRECTORY</text>
+          <text x="610" y="216" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--slate)">company record only</text>
+          <rect x="516" y="264" width="188" height="52" rx="6" fill="none" stroke="var(--dropped)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="610" y="286" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--dropped)">DROPPED + DISCLOSED</text>
+          <text x="610" y="304" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--dropped)">removed, reason logged</text>
+        </svg>
+        <figcaption class="vd-fig-caption">Every row exits exactly one way: graded into a tier, or removed and listed in the disclosure note. Failed rows are never padded back in to hit a row count.</figcaption>
+      </figure>
       <p style="margin-top:26px">Records that fail every check are dropped from the file and listed in the disclosure note with a reason. That number is never hidden.</p>
     </div>
   </section>

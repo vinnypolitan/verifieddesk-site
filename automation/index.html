@@ -157,6 +157,42 @@
     </div>
   </section>
 
+  <section class="ledger-block" aria-label="How a typical build runs">
+    <div class="wrap">
+      <figure class="vd-diagram" style="margin-top:0">
+        <svg viewBox="0 0 720 300" width="100%" role="img" aria-label="Automation flow diagram: a trigger event is processed by an extract step, then a validate step, then routed into the destination system. Anything the validate step cannot handle branches to a human queue with the reason logged, so nothing fails silently." xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="vd-arr3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#93a1c0"/></marker>
+            <marker id="vd-arr3-ex" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#f5c36b"/></marker>
+          </defs>
+          <text x="16" y="34" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--slate)">THE MANUAL PROCESS, REBUILT AS A PIPELINE</text>
+          <rect x="16" y="56" width="150" height="72" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="91" y="86" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">TRIGGER</text>
+          <text x="91" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--slate)">work arrives on its own</text>
+          <rect x="200" y="56" width="150" height="72" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="275" y="86" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">PROCESS</text>
+          <text x="275" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--slate)">read, extract, transform</text>
+          <rect x="384" y="56" width="150" height="72" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(108,140,255,0.45)"/>
+          <text x="459" y="86" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--pulse)">VALIDATE</text>
+          <text x="459" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--slate)">checked before it moves</text>
+          <rect x="568" y="56" width="150" height="72" rx="8" fill="none" stroke="var(--verified)" stroke-width="1.5"/>
+          <text x="643" y="86" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--verified)">ROUTE</text>
+          <text x="643" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--verified)">lands in your systems</text>
+          <line x1="166" y1="92" x2="194" y2="92" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr3)"/>
+          <line x1="350" y1="92" x2="378" y2="92" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr3)"/>
+          <line x1="534" y1="92" x2="562" y2="92" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr3)"/>
+          <line x1="459" y1="128" x2="459" y2="186" stroke="#f5c36b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#vd-arr3-ex)"/>
+          <text x="470" y="162" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--catchall)">cannot handle it?</text>
+          <rect x="359" y="192" width="200" height="72" rx="8" fill="none" stroke="var(--catchall)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="459" y="218" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--catchall)">HUMAN QUEUE</text>
+          <text x="459" y="236" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--catchall)">flagged, reason logged,</text>
+          <text x="459" y="250" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--catchall)">a person decides</text>
+        </svg>
+        <figcaption class="vd-fig-caption">The exception path is part of the design, not an afterthought. Anything the pipeline cannot handle with confidence goes to a human with the reason attached. Nothing fails silently.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section" id="builds">
     <div class="wrap">
       <p class="eyebrow">Four build scopes</p>
@@ -239,6 +275,42 @@
         </table>
         <div class="ledger-foot">Why no channel names: our brands compete on anonymity, so we do not name them publicly. <strong>Full analytics are shared on a call, verified live on screen.</strong></div>
       </div>
+
+      <figure class="vd-diagram">
+        <svg viewBox="0 0 720 300" width="100%" role="img" aria-label="Content engine pipeline diagram: research feeds script, then voice, then edit, then thumbnail, then publish, then analytics, then iterate, which loops back into research. The pipeline runs as a continuous loop with no editorial staff." xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="vd-arr4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#93a1c0"/></marker>
+            <marker id="vd-arr4-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#6c8cff"/></marker>
+          </defs>
+          <rect x="16" y="50" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="91" y="83" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">RESEARCH</text>
+          <rect x="200" y="50" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="275" y="83" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">SCRIPT</text>
+          <rect x="384" y="50" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="459" y="83" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">VOICE</text>
+          <rect x="568" y="50" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="643" y="83" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">EDIT</text>
+          <rect x="568" y="180" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="643" y="213" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">THUMBNAIL</text>
+          <rect x="384" y="180" width="150" height="56" rx="8" fill="none" stroke="var(--verified)" stroke-width="1.5"/>
+          <text x="459" y="213" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--verified)">PUBLISH</text>
+          <rect x="200" y="180" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(151,169,213,0.35)"/>
+          <text x="275" y="213" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">ANALYTICS</text>
+          <rect x="16" y="180" width="150" height="56" rx="8" fill="rgba(6,10,19,0.55)" stroke="rgba(108,140,255,0.45)"/>
+          <text x="91" y="213" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--pulse)">ITERATE</text>
+          <line x1="166" y1="78" x2="194" y2="78" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="350" y1="78" x2="378" y2="78" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="534" y1="78" x2="562" y2="78" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="643" y1="106" x2="643" y2="174" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="562" y1="208" x2="540" y2="208" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="378" y1="208" x2="356" y2="208" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <line x1="194" y1="208" x2="172" y2="208" stroke="#93a1c0" stroke-width="1.5" marker-end="url(#vd-arr4)"/>
+          <path d="M91 180 L91 112" fill="none" stroke="#6c8cff" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#vd-arr4-loop)"/>
+          <text x="102" y="150" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--pulse)">what worked feeds the next run</text>
+          <text x="16" y="278" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--slate)">ONE CONTINUOUS LOOP / NO EDITORIAL STAFF</text>
+        </svg>
+        <figcaption class="vd-fig-caption">The full production line, research to publish to iterate, running as one pipeline. Analytics feed the next cycle automatically, so the format sharpens with every run.</figcaption>
+      </figure>
 
       <div class="sheet-grid" style="margin-top:32px">
         <article class="sheet">
