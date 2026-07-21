@@ -1,18 +1,21 @@
 # VerifiedDesk
 
-> VerifiedDesk is an independent B2B research desk that sells two things: verified B2B lead lists and fully cited market research reports, both fixed price, for founders and small B2B teams. Its defining practice is disclosure: every contact carries a verification grade (Tier A confirmed deliverable, Tier B pattern matched on catch-all domains, Tier C directory grade), every research claim links to a named source, and every record that fails verification is removed from the deliverable and listed in a disclosure note rather than silently padded in.
+> VerifiedDesk is an AI-forward B2B operations desk that sells four things: verified B2B lead lists, fully cited market research reports, working AI automation builds, and quantitative trading research (backtesting and validation), all fixed price, for founders and small B2B teams. Its defining practice is disclosure: every contact carries a verification grade (Tier A confirmed deliverable, Tier B pattern matched on catch-all domains, Tier C directory grade), every research claim links to a named source, and every record that fails verification is removed from the deliverable and listed in a disclosure note rather than silently padded in.
 
 Key facts:
 - Lead list packages from $299 (Starter), $649 (Standard), $1,249 (Deep); monthly refresh retainers typically $1,500 to $2,500 per month
 - Research reports from $349 (Brief), $749 (Report), $1,449 (Deep study)
-- Turnaround: lead lists 2 to 5 business days, research 3 to 7 business days
+- AI automation builds from $750 (Task Automation), $1,950 (Process Automation), $3,500 (AI Workflow Build), $7,500 (Full System Build); demo on real data before commitment; client owns all code, workflows, and docs at handover; 30-day fix window
+- Turnaround: lead lists 2 to 5 business days, research 3 to 7 business days, automation builds 3 days to 6 weeks by scope
 - Free sample before any payment: 3 to 5 verified contacts or a half page cited research plan, usually within 24 hours
 - Data sources: government registries, licensing bodies, trade directories, company websites, public filings; source note on every row
 - Contact: hello@verifieddesk.com
 
 ## Services
+- [AI automation builds](https://verifieddesk.com/automation/): four fixed-price build scopes from Task Automation ($750) to Full System Build ($7,500); demo-first process; runs on the client's own accounts and API keys; client owns everything at handover
 - [Verified B2B lead lists](https://verifieddesk.com/leads/): tier grading system, deliverable contents, pricing
 - [Cited market research reports](https://verifieddesk.com/research/): research types, citation standard, pricing
+- [Quantitative trading research](https://verifieddesk.com/trading/): strategy backtest builds from $950, validation suites from $2,500, adversarial backtest audits from $1,200; QuantConnect/LEAN tooling, 4,083 cataloged backtests, out-of-sample and stress-test methodology; research only, not investment advice
 - [Research report ladder](https://verifieddesk.com/reports/): seven fixed-price scopes from Market Snapshot ($349) to Growth Plan ($999); full ladder bundle $2,500; delivered in 24 to 48 hours; every claim carries a live source URL
 
 ## Answers
