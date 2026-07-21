@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to tell if a backtest is lying to you | VerifiedDesk</title>
+<meta name="description" content="The signs a trading strategy backtest is overfit: in-sample versus out-of-sample gaps, parameter sensitivity, look-ahead and survivorship bias, missing costs, and the probabilistic Sharpe ratio, with sources from Bailey and Lopez de Prado.">
+<link rel="canonical" href="https://verifieddesk.com/guides/backtest-overfitting-signs/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="VerifiedDesk">
+<meta property="og:title" content="How to tell if a backtest is lying to you">
+<meta property="og:description" content="Overfitting signs, bias checks, and the probabilistic Sharpe ratio, sourced.">
+<meta property="og:url" content="https://verifieddesk.com/guides/backtest-overfitting-signs/">
+<meta property="og:image" content="https://verifieddesk.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://verifieddesk.com/og-card.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to tell if a backtest is lying to you",
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-07-20",
+  "author": { "@type": "Organization", "name": "VerifiedDesk", "url": "https://verifieddesk.com/" },
+  "publisher": { "@id": "https://verifieddesk.com/#org" },
+  "mainEntityOfPage": "https://verifieddesk.com/guides/backtest-overfitting-signs/"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">Verified<span class="tick">&#10003;</span>Desk</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/automation/">Automation</a>
+      <a href="/leads/">Lead lists</a>
+      <a href="/research/">Research</a>
+      <a href="/reports/">Reports</a>
+      <a href="/trading/">Trading</a>
+      <a href="/guides/" aria-current="page">Guides</a>
+      <a href="/faq/">FAQ</a>
+      <a href="mailto:hello@verifieddesk.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap prose">
+      <p class="eyebrow">Guide / Trading research</p>
+      <h1>How to tell if a backtest is lying to you</h1>
+      <p class="meta">Published July 20, 2026 · VerifiedDesk</p>
+
+      <p class="lede">Every backtest looks good, because bad ones get deleted before anyone sees them. The academic literature on this is blunt: most published trading results are probably false positives. Here are the specific signs that a backtest is overfit, and the checks that separate a real edge from a curve fit to history.</p>
+
+      <h2>Why the default assumption is "overfit"</h2>
+      <p>Bailey, Borwein, Lopez de Prado, and Zhu showed the core problem mathematically in a 2014 paper in the Notices of the American Mathematical Society: if you try enough strategy configurations on the same data, you are essentially guaranteed to find one with an impressive in-sample Sharpe ratio, even when no configuration has any real edge. With five years of data, testing as few as 45 independent configurations is enough to expect a Sharpe of 1.0 from pure noise (<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2308659" rel="nofollow">Pseudo-Mathematics and Financial Charlatanism</a>). Since most researchers iterate through hundreds of variants, a strong backtest is the expected outcome of the process, not evidence of skill.</p>
+      <p>The same problem infects academic finance. Harvey, Liu, and Zhu catalogued the hundreds of published return factors and concluded that, once you correct for how many things have been tried, a new result should clear a t-statistic of 3.0 rather than the usual 2.0, and that most claimed findings in the field are likely false (<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2249314" rel="nofollow">...and the Cross-Section of Expected Returns</a>). If professionals with referees fool themselves at that rate, a solo researcher with a parameter slider should assume the worst by default.</p>
+
+      <h2>Sign 1: no true out-of-sample period</h2>
+      <p>The first question for any backtest: which data did the strategy never touch during development? If every year of history was available while rules and parameters were being chosen, there is no out-of-sample evidence at all, only in-sample fit. The honest structure reserves a slice of data (or better, live paper trading going forward) that gets used exactly once, after development is frozen. QuantConnect's research guide recommends exactly this discipline: hypothesis first, walk-forward testing, and a held-out period the researcher cannot peek at (<a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide" rel="nofollow">QuantConnect research guide</a>). Beware the quiet cheat: "out-of-sample" data that was tested, found wanting, and then used to revise the strategy is in-sample data with extra steps.</p>
+
+      <h2>Sign 2: performance collapses when parameters wiggle</h2>
+      <p>A real edge is a region, not a point. If the strategy earns 40 percent annually with a 21-day lookback and loses money at 19 or 23, the backtest found a coincidence. The check is cheap: sweep each parameter across a sensible range and plot the results. Smooth, gradual degradation is what economic effects look like. Sharp cliffs around one magic value are what noise looks like. The same logic applies to start dates: a strategy whose results depend heavily on whether the test starts in January 2016 or June 2016 is telling you the equity curve is a few lucky trades wearing a trend line.</p>
+
+      <h2>Sign 3: the data knows the future</h2>
+      <p>Look-ahead bias means the simulation used information that was not available at the moment of each decision: trading on a close price before the close, using earnings figures on the announcement date when they were filed weeks later, or normalizing indicators with statistics computed over the full dataset. It produces spectacular and completely fictional results. Survivorship bias is its quieter sibling: testing on today's index members means every company that went bankrupt or got delisted was silently excluded, which flatters almost any long strategy. The fix is point-in-time data that includes dead tickers, and an audit of every input for when it actually became knowable.</p>
+
+      <h2>Sign 4: costless trading</h2>
+      <p>Commissions, spread, slippage, and borrow costs decide whether high-turnover strategies survive contact with a real account. A backtest that assumes fills at mid-price with zero fees can turn a money-losing system into a beautiful equity curve, and the more the strategy trades, the bigger the lie. Reasonable practice is to model realistic fees and slippage, then re-run the test at double the assumed costs. An edge that dies when costs double was never robust enough to trade.</p>
+
+      <h2>The probabilistic Sharpe ratio</h2>
+      <p>A raw Sharpe ratio ignores how much data produced it and how ugly the return distribution is. The probabilistic Sharpe ratio (PSR), from Bailey and Lopez de Prado's Sharpe Ratio Efficient Frontier paper, computes the probability that the true Sharpe exceeds a benchmark, penalizing short track records, negative skew, and fat tails (<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1821643" rel="nofollow">The Sharpe Ratio Efficient Frontier</a>). A Sharpe of 1.5 over eighteen months of smooth returns and a Sharpe of 1.5 over three months of lumpy ones are very different claims, and PSR says by how much. The companion deflated Sharpe ratio goes further and discounts for the number of trials you ran to find the strategy (<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551" rel="nofollow">The Deflated Sharpe Ratio</a>). QuantConnect reports PSR on every backtest; a PSR below roughly 95 percent is a flag, not a footnote.</p>
+
+      <h2>The checklist</h2>
+      <ul>
+        <li>A held-out data period or forward paper-trading window the strategy never saw during development.</li>
+        <li>Parameter sweeps showing a plateau of profitability, not a single spike.</li>
+        <li>Every input audited for look-ahead; test universe includes delisted assets.</li>
+        <li>Realistic costs modeled, and the strategy re-tested at double those costs.</li>
+        <li>PSR reported alongside Sharpe, with the number of configurations tried disclosed.</li>
+      </ul>
+      <p>Running this gauntlet is exactly what <a href="/trading/">VerifiedDesk's validation suites and backtest audits</a> do: an adversarial pass over your strategy's data handling, sensitivity, and statistics, delivered as a cited report. Whether you hire that out or do it yourself, the standard is the same: a backtest is a hypothesis test, and the burden of proof sits on the equity curve.</p>
+
+      <p class="src">Sources: Bailey, Borwein, Lopez de Prado, Zhu, Pseudo-Mathematics and Financial Charlatanism, Notices of the AMS (ssrn.com); Bailey, Borwein, Lopez de Prado, Zhu, The Probability of Backtest Overfitting, Journal of Computational Finance (ssrn.com); Harvey, Liu, Zhu, ...and the Cross-Section of Expected Returns, Review of Financial Studies (ssrn.com); Bailey, Lopez de Prado, The Sharpe Ratio Efficient Frontier (ssrn.com); Bailey, Lopez de Prado, The Deflated Sharpe Ratio, Journal of Portfolio Management (ssrn.com); QuantConnect research guide (quantconnect.com). This article is research education only. Backtested performance is hypothetical, and nothing here is investment advice or a recommendation to trade any strategy.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <p class="foot-brand">Verified<span class="tick">&#10003;</span>Desk</p>
+      <p>Independent B2B research desk. Verified lead lists and cited market research for small B2B teams.</p>
+      <p><a href="mailto:hello@verifieddesk.com">hello@verifieddesk.com</a></p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="/automation/">Automation</a>
+      <a href="/leads/">Lead lists</a>
+      <a href="/research/">Research reports</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>
