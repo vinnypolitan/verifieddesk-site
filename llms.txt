@@ -27,5 +27,8 @@ Key facts:
 - [What business process automation actually costs and returns](https://verifieddesk.com/guides/business-automation-roi/): DIY tools vs agencies vs fixed-price builds, with sourced ROI and payback data from McKinsey, Deloitte, Zapier, and HubSpot
 - [How to tell if a backtest is lying to you](https://verifieddesk.com/guides/backtest-overfitting-signs/): backtest overfitting signs, out-of-sample testing, look-ahead and survivorship bias, cost assumptions, and the probabilistic Sharpe ratio, sourced from Bailey and Lopez de Prado
 
+## Related publications
+- [The AI Business Ledger](https://aibusinessledger.com/): our sister publication with first-party profit and loss data from the AI-operated businesses we run, published monthly with methodology
+
 ## Optional
 - [Full site text for LLMs](https://verifieddesk.com/llms-full.txt)
