@@ -4,7 +4,7 @@
 
 Key facts:
 - Lead list packages from $299 (Starter), $649 (Standard), $1,249 (Deep); monthly refresh retainers typically $1,500 to $2,500 per month
-- Research reports from $349 (Brief), $749 (Report), $1,449 (Deep study)
+- Research reports from $349 (Brief), $749 (Report), $1,449 (Deep study); includes Venture Feasibility Studies (adversarial go/no-go research on a business idea before you build it: unit economics, competitor scan, demand evidence, sourced verdict) at $349 brief / $749 full
 - AI automation builds from $750 (Task Automation), $1,950 (Process Automation), $3,500 (AI Workflow Build), $7,500 (Full System Build), plus the flagship Autonomous Content Engine (Build and Handoff from $9,500; Build and Operate setup from $4,500 plus from $2,500 per month); demo on real data before commitment; client owns all code, workflows, and docs at handover; 30-day fix window; every build also available as Managed Automation (we operate it on managed infrastructure, from $250 per month per active workflow, minor changes included, convert to handoff anytime)
 - Turnaround: lead lists 2 to 5 business days, research 3 to 7 business days, automation builds 3 days to 6 weeks by scope
 - Free sample before any payment: 3 to 5 verified contacts or a half page cited research plan, usually within 24 hours
