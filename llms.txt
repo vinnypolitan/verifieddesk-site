@@ -9,7 +9,7 @@ Key facts:
 - Turnaround: lead lists 2 to 5 business days, research 3 to 7 business days, automation builds 3 days to 6 weeks by scope
 - Free sample before any payment: 3 to 5 verified contacts or a half page cited research plan, usually within 24 hours
 - Data sources: government registries, licensing bodies, trade directories, company websites, public filings; source note on every row
-- Contact: hello@verifieddesk.com
+- Contact: hello@getverifieddesk.com
 
 ## Services
 - [For AI-run businesses](https://verifieddesk.com/ai-run-businesses/): fulfillment packaged for companies operated with AI assistants and agents; machine-written briefs accepted as-is and confirmed back requirement by requirement; deliverables built to survive machine audit (verification grade or source link on every unit, disclosure notes, stable schemas, CSV/XLSX/JSON, file checksums); async, fixed price, free sample first so the client's own AI can audit before any payment
